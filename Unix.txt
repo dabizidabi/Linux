@@ -4,4 +4,5 @@ lsblk
 blkid
 fdisk -l (/dev/sda)
 mkfs -t (type) /dev/sda
+mkfs.ext4 /dev/sda
 
