@@ -1,0 +1,7 @@
+-------DISK-------
+/etc/fstab
+lsblk
+blkid
+fdisk -l (/dev/sda)
+mkfs -t (type) /dev/sda
+
