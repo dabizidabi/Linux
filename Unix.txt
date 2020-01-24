@@ -8,3 +8,6 @@ mkfs.ext4 /dev/sda
 mount -t (type) 
 umount
 e2label /dev/sda "Name Label"
+
+
+------cron--------
