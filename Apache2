@@ -1,0 +1,5 @@
+--------SSL----------
+a2enmod
+ssl   #add mod ssl
+a2ensite
+default-ssl #add ssl config to site
