@@ -3,3 +3,4 @@ a2enmod
 ssl   #add mod ssl
 a2ensite
 default-ssl #add ssl config to site
+openssl x509 -in <sertificate> -text #viev sertificates
