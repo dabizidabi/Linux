@@ -11,7 +11,7 @@ after generate private key change acces group, chown :ssl-cert!
 openssl req -new -x509 -days 365 -out server.crt -key /etc/ssl/private/server.key #generate new sertificate for 365 days with private key server.key
 /etc/apache2/sites-avaliable/default-ssl.conf in file SSLCertificateFile source for right certificate
 
-create reqest to MS Certificate Autorithy (CA):
+create reqest to MS Certificate Authority (CA):
 openssl req -new -key server.key -out server.req
 copy sert.req to /var/www/html (this option find in /etc/apache2/sites-avaliable/sites-default.conf)
 on windows explorer open http://192.168.0.100/sert.req
