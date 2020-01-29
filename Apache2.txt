@@ -20,3 +20,6 @@ on windows explorer open http://192.168.0.100/sert.req
 On/Off port * 80
 1. a2dissite 000-default.conf
 2 ./etc/apache2/ports.conf comment Listen 80
+
+
+viev open ports netstat -autpn
