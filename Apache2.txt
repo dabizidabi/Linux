@@ -15,3 +15,8 @@ create reqest to MS Certificate Authority (CA):
 openssl req -new -key server.key -out server.req
 copy sert.req to /var/www/html (this option find in /etc/apache2/sites-avaliable/sites-default.conf)
 on windows explorer open http://192.168.0.100/sert.req
+
+
+On/Off port * 80
+1. a2dissite 000-default.conf
+2 ./etc/apache2/ports.conf comment Listen 80
