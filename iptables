@@ -7,4 +7,7 @@ iptables -P INPUT DROP #drop input packets
 iptables -P FORWARD DROP #drop forward packets
 iptables -A INPUT -p icmp -j ACCEPT #allow icmp
 iptables-save > /home/user/iptables.backup #save rules of iptables
+iptables-restore < iptables.backup #restore backup
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT #allow Established conections
+
 
