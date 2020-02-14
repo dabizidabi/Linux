@@ -10,6 +10,9 @@ iptables-save > /home/user/iptables.backup #save rules of iptables
 or
 Ubuntu:
 sudo install iptables-persistent |yes|yes #save fules in /etc/iptables/rules.v4
+#save from iptables-persistent
+sudo netfilter-persistent save |or
+sudo dpkgreconfigure iptables-persistent
 
 iptables-restore < iptables.backup #restore backup
 iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT #allow Established conections
