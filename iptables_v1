@@ -71,4 +71,6 @@ iptables -A INPUT -s 192.1688.0.0/24 -p tcp -m multiport --ports 3128 -j ACCEPT
 #add rules for workstation route 80 port to 3128
 iptables -t nat -A PREROUTING -s 192.168.0.0/24 -p tcp -m multiport --dports 80,8080 -j REDIRECT --to-ports 3128
 
+#squid proxy (https)
+
 
