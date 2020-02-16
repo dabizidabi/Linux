@@ -52,3 +52,19 @@ iptables -A FORWARD -p tcp -m multiport --ports 80.8080,443,110,25,21 -s 192.168
 iptables -A INPUT -s 192.168.0.0/24 -p udp -m multiport --ports 53 -j ACCEPT #accept packets from subnet 192... to port 53
 iptables -A INPUT -s 192.168.0.0/24 -p tcp -m multiport --ports 53 -j ACCEPT
 
+#squid proxy (http)
+see version sudo /usr/sbin/squid -v
+cp /etc/squid/squid.conf /etc/squid/squid.conf.backup (create backup conf file)
+vi squid.conf:
+--
+  acl localnet src 192.168.0.0/24 
+  ..
+  http_access allow localnet
+  ..
+  http_port 192.168.0.10:3128 intercert <--(for browsers with no proxy settings)
+--
+#delete forwarding http ports 
+iptables -D FORWARD -p tcp -m multiport --ports 80,8080,443,110,25,21 -s 192.168.0.0/24 -j ACCEPT
+iptables -A FORWARD -p tcp -m multiport --ports 110,25,21 -s 192.168.0.0/24 -j ACCEPT  
+
+
