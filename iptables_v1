@@ -66,5 +66,9 @@ vi squid.conf:
 #delete forwarding http ports 
 iptables -D FORWARD -p tcp -m multiport --ports 80,8080,443,110,25,21 -s 192.168.0.0/24 -j ACCEPT
 iptables -A FORWARD -p tcp -m multiport --ports 110,25,21 -s 192.168.0.0/24 -j ACCEPT  
+#add rules for proxy
+iptables -A INPUT -s 192.1688.0.0/24 -p tcp -m multiport --ports 3128 -j ACCEPT
+#add rules for workstation route 80 port to 3128
+iptables -t nat -A PREROUTING -s 192.168.0.0/24 -p tcp -m multiport --dports 80,8080 -j REDIRECT --to-ports 3128
 
 
