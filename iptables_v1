@@ -27,5 +27,27 @@ iptables -A FORWARD -p udp -m multiport --ports 53 -s 192.168.0.0/24 -j ACCEPT #
 or
 iptables -A FORWARD -p tcp -m multiport --ports 53,80.8080,443,110,25,21 -s 192.168.0.0/24 -j ACCEPT #allow ports from 192.168.. subnet
 
+#DNAT (destination network address translation) 81, 80 ports
+iptables -t nat -A PREROUTING -i enp0s3 -p tcp -m tcp --dport 80 -j DNAT --to-destination 192.168.0.101
+iptables -A FORWARD -i enp0s3 -p tcp --dport 80 -J ACCEPT
+
+#DNS on proxy
+vim /etc/bind/named.conf.potions #config file dns
+--
+forwarders {
+  10.0.1.1;
+  };
+  forward first;
+  listen-on port { 192.168.0.10; };
+  //dnssec-validation auto;
+--
+#config rndc keys
+sudo rndc-confgen -r /dev/urandom #uncoment block save in rndc.conf, comment block save in named.conf and uncoment
+iptables -A INPUT -i lo -j ACCEPT (and add AUTPUT if block)
+#delete previous DNS rules
+iptables -D FORWARD -p tcp -m multiport --ports 53 -s 192.168.0.0/24 -j ACCEPT
+iptables -D FORWARD -p udp -m multiport --ports 53 -s 192.168.0.0/24 -j ACCEPT
+
+
 
 
