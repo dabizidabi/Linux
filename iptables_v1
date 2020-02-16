@@ -72,5 +72,41 @@ iptables -A INPUT -s 192.1688.0.0/24 -p tcp -m multiport --ports 3128 -j ACCEPT
 iptables -t nat -A PREROUTING -s 192.168.0.0/24 -p tcp -m multiport --dports 80,8080 -j REDIRECT --to-ports 3128
 
 #squid proxy (https)
+  #install squid
+apt install openssl devscripts build-essential dpkg-dev libssl-dev
+
+apt-get build-dep squid3
+apt-get source squid3
+vim debian/rules
+--
+  --enable-sll \
+  --enables-ssl-crtd \
+  --with-openssl \
+--
+dpkg-buildpackage -d #build
+dpkg -i *.deb
+if errors
+apt-get install -f (fix dependens)
+dpkg -i *.deb
+squid -v
+# generate squid certificate
+cd /etc/squid
+openssl -req -new -newkey rsa:1024 -days 365 -nodes -x509 -keyout squidCA.pen -out squidCA.pem # generate certificate
+vim /etc/squid.conf
+--
+  acl localnet src 192.168.0.0/24 #acces local network
+  ..
+  http_acces allow localnet
+  ..
+  http_port 192.168.0.10:3128
+  https_port 192.168.0.10:3129 ssl-bump cert=/etc/squid/squidCA.pem
+  ssl_bump peek all
+  ssl_bump splice all
+  sslcrtd_program /user/lib/squid/sl_crtd -s /var/lib/ssl_db -M 4MB
+squid -k parse
+squid -k reconfigure
+#add port 3129
+iptables -A INPUT -s 192.1688.0.0/24 -p tcp -m multiport --ports 3129 -j ACCEPT
+iptables -t nat -A PREROUTING -s 192.168.0.0/24 -p tcp -m multiport --dports 443 -j REDIRECT --to-ports 3129
 
 
