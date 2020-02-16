@@ -47,7 +47,8 @@ iptables -A INPUT -i lo -j ACCEPT (and add AUTPUT if block)
 #delete previous DNS rules
 iptables -D FORWARD -p tcp -m multiport --ports 53 -s 192.168.0.0/24 -j ACCEPT
 iptables -D FORWARD -p udp -m multiport --ports 53 -s 192.168.0.0/24 -j ACCEPT
-
-
-
+iptables -D FORWARD -p tcp -m multiport --ports 53,80.8080,443,110,25,21 -s 192.168.0.0/24 -j ACCEPT
+iptables -A FORWARD -p tcp -m multiport --ports 80.8080,443,110,25,21 -s 192.168.0.0/24 -j ACCEPT
+iptables -A INPUT -s 192.168.0.0/24 -p udp -m multiport --ports 53 -j ACCEPT #accept packets from subnet 192... to port 53
+iptables -A INPUT -s 192.168.0.0/24 -p tcp -m multiport --ports 53 -j ACCEPT
 
