@@ -62,10 +62,18 @@ ZQ** ** (не сохранять и выйти);
 
 
 
-COURSOR
-CTRL+A move coursore to start
-CTRL+E move coursore to end
-CTRL+F move coursore to one simvol next
-CTRL+B move coursore to one simvol back
-ALT+F move coursore to one word next
-ALT+B move coursore to one word back
+CURSOR
+CTRL+A move cursore to start
+CTRL+E move cursore to end
+CTRL+F move cursore to one simvol next
+CTRL+B move cursore to one simvol back
+ALT+F move cursore to one word next
+ALT+B move cursore to one word back
+
+CTRL+D Удаляет символ в позиции курсора
+CTRL+T Меняет местами два символа — в позиции курсора и предшествующий ему
+ALT+T Меняет местами два слова — в позиции курсора и предшествующее ему
+ALT+L Переводит в нижний регистр символы, начиная с символа в позиции курсора
+и до конца слова
+ALT+U Переводит в верхний регистр символы, начиная с символа в позиции курсора
+и до конца слова
