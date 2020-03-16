@@ -59,3 +59,13 @@ N** ** _ (показать предыдущий результат поиска)
 
 **ZZ ** (сохранить и выйти)__;
 ZQ** ** (не сохранять и выйти);
+
+
+
+COURSOR
+CTRL+A move coursore to start
+CTRL+E move coursore to end
+CTRL+F move coursore to one simvol next
+CTRL+B move coursore to one simvol back
+ALT+F move coursore to one word next
+ALT+B move coursore to one word back
