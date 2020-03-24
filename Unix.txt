@@ -11,3 +11,11 @@ e2label /dev/sda "Name Label"
 
 
 ------cron--------
+
+
+
+
+------find--------
+find /home -type f -name "file.txt" -exec chmod 0700 '{}' ';' 
+(-perm, xargs)
+
