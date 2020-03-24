@@ -19,4 +19,5 @@ e2label /dev/sda "Name Label"
 find /home -type f -name "file.txt" -exec chmod 0700 '{}' ';' 
 (-perm, xargs)
 -maxdepth <number_level> 
+find /home/test -type f -name 'file-a' -exec tar rf test.tar '{}' '+'
 
