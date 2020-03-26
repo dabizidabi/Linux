@@ -21,3 +21,5 @@ find /home -type f -name "file.txt" -exec chmod 0700 '{}' ';'
 -maxdepth <number_level> 
 find /home/test -type f -name 'file-a' -exec tar rf test.tar '{}' '+'
 
+-----zip------
+find /home/test -type f -name 'file-a' | zip -@ file-A.zip
