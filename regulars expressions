@@ -1,0 +1,1 @@
+grep -i '..j.r$' /usr/share/dict/words
