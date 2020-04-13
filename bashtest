@@ -11,3 +11,12 @@ else
                 sort -k 3 -t : -n /etc/passwd | cut -f 1,2 -d : /etc/passwd
         fi
 fi
+
+#################################################################
+#!/bin/bash -x
+
+user=world
+
+[ $# -qe 1 ] && user=$*
+
+echo Hello, $user
