@@ -1,0 +1,22 @@
+#!/bin/bash
+#cut -f 1,2 -d : /etc/passwd
+if [ -h = $1 ]
+then
+        echo "help help help!"
+else
+        if [ -t = $1 ]
+        then
+                getent passwd | cut -f 1,2 -d : | sort
+        else
+                sort -k 3 -t : -n /etc/passwd | cut -f 1,2 -d : /etc/passwd
+        fi
+fi
+
+#################################################################
+#!/bin/bash -x
+
+user=world
+
+[ $# -qe 1 ] && user=$*
+
+echo Hello, $user
