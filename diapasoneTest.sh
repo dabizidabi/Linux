@@ -14,5 +14,5 @@ if [[ $INT =~ ^-?[0-9]+$ ]]; then
                 echo "INT isnt in diapasone"
         fi
 else
-        echo "INT is no integer"
+        echo "INT is no integer" 
 fi
