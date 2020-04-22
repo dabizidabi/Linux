@@ -1,4 +1,5 @@
 #!/bin/bash
+#easy prove
 INT=$1
 MAX=50
 MIN=1
