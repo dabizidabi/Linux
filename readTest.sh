@@ -2,7 +2,7 @@
 
 echo -n "Write values "
 
-read var1 var2 var3 var4
+read  var1 var2 var3 var4
 
 echo "Value1 = $var1"
 echo "Value2 = $var2" 
