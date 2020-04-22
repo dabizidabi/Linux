@@ -17,3 +17,4 @@ if [[ $INT =~ ^-?[0-9]+$ ]]; then
 else
         echo "INT is no integer" 
 fi
+
