@@ -1,4 +1,5 @@
 #!/bin/bash
+#easy prove
 INT=$1
 MAX=50
 MIN=1
@@ -16,3 +17,4 @@ if [[ $INT =~ ^-?[0-9]+$ ]]; then
 else
         echo "INT is no integer" 
 fi
+
