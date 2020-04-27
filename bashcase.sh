@@ -1,10 +1,10 @@
 #!/bin/bash
 
 case $1 in
-        -t) date
+        -t|-T) date
                 ;;
-        -a) ls -l
+        -a|-A) ls -l
                 ;;
-        -b) ll
+        -b|-B) ll
                 ;;
 esac
