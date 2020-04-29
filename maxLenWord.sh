@@ -5,7 +5,7 @@ while [[ -n "$1" ]]; do
 		max_word=
 		max_len=0
 		for i in $(strings "$1"); do
-			len="$(echo "$i" | wc -c)"
+			len="${#i}"
 			if (( len > max_len )); then
 				max_len="$len"
 				max_word="$i"
