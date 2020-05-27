@@ -6,3 +6,4 @@ systemctl isolate multi-user.target
 systemctl get-default
 systemctl set-default multi-user.target
 systemctl list-units --type=target
+systemctl add-wants multi-user.target my.local.service
