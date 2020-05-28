@@ -1,3 +1,4 @@
+Linux
 systemctl list-units --type=service
 systemctl list-unit-files --type=service
 systemctl status -l cups
@@ -7,3 +8,10 @@ systemctl get-default
 systemctl set-default multi-user.target
 systemctl list-units --type=target
 systemctl add-wants multi-user.target my.local.service
+
+journalctl --list-boots
+journalctl -b -1
+journalctl -u ntp (restrict the logs with specific unit)
+
+Unix
+
