@@ -14,4 +14,4 @@ journalctl -b -1
 journalctl -u ntp (restrict the logs with specific unit)
 
 Unix
-
+service sshd stop
