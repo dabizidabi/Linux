@@ -1,0 +1,5 @@
+sudoers configuration file
+/etc/sudoers
+/usr/local/etc/sudoers
+
+sudo passwd -u root (-u unlock / -l lock root account)
