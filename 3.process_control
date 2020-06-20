@@ -1,1 +1,4 @@
 kill -l #list signals
+kill [-signal] pid
+killall httpd #kill all apache processes
+pkill -u ben #kill all processes for user ben
