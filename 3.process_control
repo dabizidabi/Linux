@@ -5,3 +5,8 @@ pkill -u ben #kill all processes for user ben
 ps aux #viev all processes running is the system (a -all proc, x - nt have terminal, u -user oriented output format
 ps lax # l - long format
 pidof /usr/sbin/sshd or pgrep sshd #determine the PID of procces
+
+/usr/bin/nice
+nice -n 5 ~/bin/longtask #Lowers priority (raise nice) by 5
+sudo renice -5 8829 #set niceness by -5
+sudo renice 5 -u boggs #set niceness of boggs procs to 5
