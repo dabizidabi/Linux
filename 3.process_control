@@ -10,3 +10,7 @@ pidof /usr/sbin/sshd or pgrep sshd #determine the PID of procces
 nice -n 5 ~/bin/longtask #Lowers priority (raise nice) by 5
 sudo renice -5 8829 #set niceness by -5
 sudo renice 5 -u boggs #set niceness of boggs procs to 5
+
+sudo strace -p 5810 #trace system calls Linux
+-e trace=file #discover location of evasise config files
+truss cp /etc/passwd /tmp/pw #trace system calls Unix
