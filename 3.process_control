@@ -14,3 +14,10 @@ sudo renice 5 -u boggs #set niceness of boggs procs to 5
 sudo strace -p 5810 #trace system calls Linux
 -e trace=file #discover location of evasise config files
 truss cp /etc/passwd /tmp/pw #trace system calls Unix
+
+crontab filename #installs filename as your crontab
+crontab -e #checks out a copy of crontab
+crontab -l #lists contents
+crontab -r #remove cron job
+crontab -l bob #see bobs crontab
+crontab -u bob crontab.new #allow bobs crontabfile
