@@ -21,3 +21,10 @@ crontab -l #lists contents
 crontab -r #remove cron job
 crontab -l bob #see bobs crontab
 crontab -u bob crontab.new #allow bobs crontabfile
+/etc/crontab.{allow,deny} #which users may submit crontab in Linux
+/etc/cron/{allow,deby} #Unix
+
+systemctl list-timers #list active timers
+systemctl start systemd-tmpfiles-clean #run timer
+systemctl enable nameOftimer #enable timer on boot
+/etc/systemd/system #directory with own timers
