@@ -1,1 +1,13 @@
 file /usr/include #determine file type
+ls -lh #shows file in human-readable form
+ls -lt #modific time
+ls -ltr #reverse
+
+1 000 --x
+2 010 -w-
+4 100 r--
+1+2+4 = 7 = 777 rwxrwxrwx
+chmod --reference=filea fileb #makes fileb mode same filea
+
+lsattr #File attribute flags
+chattr #
