@@ -11,3 +11,13 @@ chmod --reference=filea fileb #makes fileb mode same filea
 
 lsattr #File attribute flags
 chattr #
+
+getfacl example #show acl for file example
+getfacl --omit-header example #
+
+setfacl -m user::r,user::bob:rw,group:sudo:rw example #set acl for file example -m (modify) -n (add)
+
+example:
+getfacl -q file > /tmp/file.acl
+vi /tmp/file.acl #Make any required changes
+setfacl -b -M /tmp/file.acl file
