@@ -1,0 +1,6 @@
+rpm -i (install), -U (upgrade), -e (erase) -q (query)
+rpm -qa #List all packages inst on the system
+rpm -q --whatreqires openssh #see depend to openssh package
+
+dpkg --install, --remove, -l (list)
+dpkg -l | grep -i http
