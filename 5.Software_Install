@@ -13,3 +13,10 @@ apt --download-only #only download packages to upgrade system in /var/cache/apt
 Unix
 uname -r #viev current branch
 freebsd-update fetch install #update and install latest base binares
+pkg #package manager Freebsd
+/var/db/pkg/local/slite #database with info all packages in system
+
+Ports collection 
+/usr/ports
+portsnap fetch extract #initialize ports tree
+portsnap fetch update
