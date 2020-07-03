@@ -1,6 +1,15 @@
+/etc/yum.conf #conf file for yum
 rpm -i (install), -U (upgrade), -e (erase) -q (query)
 rpm -qa #List all packages inst on the system
 rpm -q --whatreqires openssh #see depend to openssh package
 
+/etc/apt/source.list #repository
 dpkg --install, --remove, -l (list)
 dpkg -l | grep -i http
+apt install apt-mirror #create mirror repo on local pc
+sudo apt-mirror #update mirror
+apt --download-only #only download packages to upgrade system in /var/cache/apt
+
+Unix
+uname -r #viev current branch
+freebsd-update fetch install #update and install latest base binares
