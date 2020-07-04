@@ -1,0 +1,1 @@
+ansible -i hosts all -m ping #test connections to servers
