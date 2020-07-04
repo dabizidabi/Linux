@@ -1,1 +1,2 @@
 ansible -i hosts all -m ping #test connections to servers
+ansible all -m ping #if ansible.cfg enable inventory file run this command 

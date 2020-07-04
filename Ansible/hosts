@@ -1,5 +1,11 @@
 [test_servers]
-linux2 ansible_host=192.168.1.7 ansible_user=user ansible_ssh_private_key_file=/home/user/.ssh/server2.pub
+linux2 ansible_host=192.168.1.7 ansible_ssh_private_key_file=/home/user/.ssh/server2.pub
+
+[test_servers:vars]
+ansible_user=user
 
 [prod_servers]
-linux3 ansible_host=192.168.1.8 ansible_user=user ansible_ssh_private_key_file=/home/user/.ssh/server3.pub
+linux3 ansible_host=192.168.1.8 ansible_ssh_private_key_file=/home/user/.ssh/server3.pub
+
+[prod_servers:vars]
+ansible_user=user
