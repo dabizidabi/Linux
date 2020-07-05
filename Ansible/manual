@@ -1,2 +1,5 @@
 ansible -i hosts all -m ping #test connections to servers
 ansible all -m ping #if ansible.cfg enable inventory file run this command 
+ansible windows_servers -m win_ping --ask-pass
+ansible-inventory --list #list all servers
+ansible-inventory --graph #show tree group servers 
