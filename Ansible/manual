@@ -1,5 +1,12 @@
+Ansible Ad-Hoc commands:
+
 ansible -i hosts all -m ping #test connections to servers
 ansible all -m ping #if ansible.cfg enable inventory file run this command 
 ansible windows_servers -m win_ping --ask-pass
+ansible test_servers -m setup
+ansible test_servers -m shell -a "uptime"
+ansible test_servers -m shell -a "ls /etc"
+
+
 ansible-inventory --list #list all servers
 ansible-inventory --graph #show tree group servers 
