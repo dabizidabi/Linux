@@ -1,9 +1,6 @@
-10.50.1.1
-10.51.1.2
-
 [staging_DB]
 192.168.0.50
-192.168.0.51
+192.168.0.51 password=mysecret
 
 [staging_web]
 192.168.1.55
@@ -25,20 +22,10 @@ staging_web
 
 
 [test_servers]
-linux2 ansible_host=192.168.1.7 ansible_ssh_private_key_file=/home/user/.ssh/server2.pub
-
-[test_servers:vars]
-ansible_user=user
+linux2 ansible_host=192.168.1.7 
 
 [prod_servers]
-linux3 ansible_host=192.168.1.8 ansible_ssh_private_key_file=/home/user/.ssh/server3.pub
-
-[prod_servers:vars]
-ansible_user=user
+linux3 ansible_host=192.168.1.8 
 
 [windows_servers]
 windows2019 ansible_host=192.168.1.9
-ansible_user=Administrator
-ansible_port=5986
-ansible_connetciot=winrm
-ansible_winrm_server_cert_validation=ignore
