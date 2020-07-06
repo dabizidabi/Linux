@@ -6,6 +6,9 @@ ansible windows_servers -m win_ping --ask-pass
 ansible test_servers -m setup
 ansible test_servers -m shell -a "uptime"
 ansible test_servers -m shell -a "ls /etc"
+ansible test_servers -m copy -a "src=/home/user/Git/Linux/Ansible/test.file dest=/tmp mode=777" 
+ansible test_servers -m copy -a "src=/home/user/Git/Linux/Ansible/test.file dest=/tmp mode=777" -b -K #key -b (become sudo), -K (asl-become-pass) - run command with root privileges
+ansible all -m file -a "path=/tmp/test.file state=absent" #delete file from all servers
 
 
 ansible-inventory --list #list all servers
