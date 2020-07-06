@@ -18,3 +18,7 @@ ansible all -m uri -a "url=https://google.com" #test connection to website
 
 ansible-inventory --list #list all servers
 ansible-inventory --graph #show tree group servers 
+
+PLAYBOOKS:
+
+ansible-palybook myolaybook1.yml #run playbook

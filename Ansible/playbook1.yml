@@ -1,0 +1,10 @@
+---
+- name: Test Connection to servers 
+  hosts: [test_servers, prod_servers]
+  become: yes
+
+  tasks:
+
+  - name: Ping servers
+    ping:
+
