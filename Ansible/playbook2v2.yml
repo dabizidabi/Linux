@@ -1,0 +1,26 @@
+---
+- name: Install httpd web-server
+  hosts: test_servers
+  become: yes
+
+  tasks: 
+  
+  - block: #block for RedHat
+
+    - name: install Apache Webserver CentOS
+      yum:  name=httpd state=latest
+     
+    - name: Apache start and Enable on boot (RedHat)
+      service: name=httpd state=started enabled=yes
+
+    when: ansible_os_family == "RedHat"
+
+  - block: #block for Debian
+
+    - name: install Apache Webserver Ubuntu
+      apt: name=apache2 state=latest
+
+    - name: Apache start and Enable on boot (Ubuntu)
+      service: name=apache2 state=started enabled=yes
+
+    when: ansible_os_family == "Debian"

@@ -4,9 +4,18 @@
   become: yes
 
   tasks: 
-  - name: install Apache Webserver
+  - name: install Apache Webserver CentOS
     yum:  name=httpd state=latest
+    when: ansible_os_family == "RedHat"
 
-  - name: Apache start and Enable on boot
+  - name: install Apache Webserver Ubuntu
+    apt: name=apache2 state=latest
+    when: ansible_os_family == "Debian"
+
+  - name: Apache start and Enable on boot (RedHat)
     service: name=httpd state=started enabled=yes
+    when: ansible_os_family == "RedHat"
 
+  - name: Apache start and Enable on boot (Ubuntu)
+    service: name=apache2 state=started enabled=yes
+    when: ansible_os_family == "Debian"
