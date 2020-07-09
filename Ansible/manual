@@ -22,3 +22,9 @@ ansible-inventory --graph #show tree group servers
 PLAYBOOKS:
 
 ansible-palybook myolaybook1.yml #run playbook
+
+ROLES:
+ansible-galaxy init test_deploy
+
+EXTRA-VARS
+ansible-laybook playbook1.yml --extra-var "MYHOSTS=test_servers"
