@@ -1,0 +1,18 @@
+---
+- name: copy test file
+  hosts: test_servers
+  become: yes
+
+  vars:
+   source_file: /etc/passwd
+   destin_file: /tmp
+
+  tasks:
+  - name: copy files
+    copy: src={{ source_file }} dest={{ destin_file }} mode=440
+    notify: write log
+
+  handlers:
+  - name: write log
+    shell: echo "`date` file is changed" >> /tmp/testlog
+

@@ -1,0 +1,31 @@
+---
+- name  : Test variables in playbook Ansible
+  hosts : test_servers
+  become: yes
+
+  vars:
+    message1   : Hi
+    message2   : People
+    secret_pass: JKFSJD:LK"KFJSJJJDF
+
+  tasks:
+    - name: Print secret var
+      debug:
+        var: secret_pass
+
+    - debug: 
+        msg: "Secret pass is: {{ secret_pass }}"
+
+    - set_fact: message="{{ message1 }} {{ message2 }}"
+        
+    - debug:
+        var: message
+      
+    - debug:
+        var: ansible_default_ipv4.address    
+
+    - shell: date
+      register: results
+
+    - debug:
+        var: results.stdout

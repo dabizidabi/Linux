@@ -1,0 +1,12 @@
+---
+ - name: Create file1
+   copy:
+      dest: /home/secret/dir1/file1.txt
+      content: |
+        Test text, {{ text }}
+
+ - name: Create file2
+   copy:
+      dest: /home/secret/dir2/file2.txt
+      content: |
+        Test text, {{ text }}

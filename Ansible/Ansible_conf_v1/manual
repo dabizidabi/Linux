@@ -1,0 +1,30 @@
+Ansible Ad-Hoc commands: (ansible-doc -l #see all commands)
+
+ansible -i hosts all -m ping #test connections to servers
+ansible all -m ping #if ansible.cfg enable inventory file run this command 
+ansible windows_servers -m win_ping --ask-pass
+ansible test_servers -m setup
+ansible test_servers -m shell -a "uptime"
+ansible test_servers -m shell -a "ls /etc"
+ansible test_servers -m copy -a "src=/home/user/Git/Linux/Ansible/test.file dest=/tmp mode=777" 
+ansible test_servers -m copy -a "src=/home/user/Git/Linux/Ansible/test.file dest=/tmp mode=777" -b -K #key -b (become sudo), -K (asl-become-pass) - run command with root privileges
+ansible all -m file -a "path=/tmp/test.file state=absent" #delete file from all servers
+ansible all -m get_url -a "url=http://www.africau.edu/images/default/sample.pdf dest=/tmp" #download file 
+ansible all -m yum -a "name=httpd state=latest" -b -K #install apache on all servers
+ansible all -m service -a "name=httpd stae=started enabled=yes" -b #enable web-server
+ansible all -m yum -a "name=httpd state=removed" -b -K #unistall apache on all servers
+ansible all -m uri -a "url=https://google.com" #test connection to website
+
+
+ansible-inventory --list #list all servers
+ansible-inventory --graph #show tree group servers 
+
+PLAYBOOKS:
+
+ansible-palybook myolaybook1.yml #run playbook
+
+ROLES:
+ansible-galaxy init test_deploy
+
+EXTRA-VARS
+ansible-laybook playbook1.yml --extra-var "MYHOSTS=test_servers"
