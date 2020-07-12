@@ -1,31 +1,6 @@
-[staging_DB]
-192.168.0.50
-192.168.0.51 password=mysecret
-
-[staging_web]
-192.168.1.55
-192.168.1.56
-
-[staging_APP]
-192.168.1.57
-192.168.1.58
-
-[staging_ALL:children]
-staging_DB
-staging_APP
-staging_web
-
-[staging_prod:children]
-prod_servers
-staging_DB
-staging_web
-
-
 [test_servers]
-linux2 ansible_host=192.168.1.7 
+ubuntu ansible_host=192.168.1.104
 
 [prod_servers]
-linux3 ansible_host=192.168.1.8 
+centos ansible_host=192.168.1.107
 
-[windows_servers]
-windows2019 ansible_host=192.168.1.9
