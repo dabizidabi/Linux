@@ -1,0 +1,22 @@
+---
+- name: Test playbook
+  hosts: all
+  become: yes
+
+  vars:
+    mytext: "Test text text text"
+ 
+  tasks:
+
+  - name: Create file1
+    copy:
+      dest: /home/user/file1.txt
+      content:
+              This is some text {{ mytext }}
+    delegate_to: ubuntu
+
+  - name: Create file2
+    copy:
+      dest: /home/user/file2.txt
+      content:
+              This is some text {{ mytext }}

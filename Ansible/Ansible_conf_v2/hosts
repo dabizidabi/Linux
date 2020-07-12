@@ -1,6 +1,11 @@
-[test_servers]
-ubuntu ansible_host=192.168.1.104
+[DB_servers]
+ubuntu ansible_host=192.168.1.102
 
-[prod_servers]
-centos ansible_host=192.168.1.107
+[WEB_servers]
+centos ansible_host=192.168.1.108
+
+[test_servers:children]
+DB_servers
+WEB_servers
+
 
