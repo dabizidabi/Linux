@@ -8,6 +8,10 @@
  
   tasks:
 
+  - name: Test unregister Server from loadbalancer
+    shell: echo This sever {{ inventory_hostname }} was unregistered from LB, node name is {{ ansible_nodename }} >> /home/user/log.ansible.txt
+    delegate_to: 127.0.0.1
+
   - name: Create file1
     copy:
       dest: /home/user/file1.txt
@@ -20,3 +24,16 @@
       dest: /home/user/file2.txt
       content:
               This is some text {{ mytext }}
+
+  - name: Reboot nodes servers
+    shell: sleep 3 && reboot now
+    async: 1
+    poll: 0 
+
+  - name: Wait nodes servers for come up
+    wait_for:
+       host: "{{ inventory_hostname }}"
+       state: started
+       delay: 5
+       timeout: 40
+    delegate_to: 127.0.0.1     
