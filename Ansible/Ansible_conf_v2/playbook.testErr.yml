@@ -1,0 +1,24 @@
+---
+- name: Test playbook
+  hosts: all
+  become: yes
+
+  tasks:
+
+  - name: Test error 
+    yum: name=httpdddd state=latest
+    ignore_errors: yes
+
+  - name: Test error2
+    shell: echo Test message && ls -la /home/
+    register: results
+    failed_when: results.rc == 0 
+#   failed_when: "'user' in results.stdout" 
+
+  - debug:
+      var: results
+
+  - name: Test error3
+    shell: echo Test message 2
+
+

@@ -28,3 +28,16 @@ ansible-galaxy init test_deploy
 
 EXTRA-VARS
 ansible-laybook playbook1.yml --extra-var "MYHOSTS=test_servers"
+
+Ansible Secret
+ansible-vault create mysecret_file.txt
+ansible-vault view mysecret_file.txt
+ansible-vault edit mysecret_file.txt
+ansible-vault rekey mysecret_file.txt #change password for file
+ansible-vault encrypt playbook.yml #add password to playbook file
+ansible-vault decrypt playbook.yml #del password to playbook file
+ansible-playbook playbook.yml --ask-vault-pass #run encrypt playbook
+ansible-playbook playbook.yml --vault-password-file mypass.txt #run encrypt playbook without passwd prompt
+ansible-vault encrypt_string # create encrypt password
+echo -n "balsadwajdk" | ansible-vault encrypt_string
+
