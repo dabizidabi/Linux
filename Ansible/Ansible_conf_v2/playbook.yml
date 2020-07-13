@@ -11,6 +11,10 @@
   - name: Test unregister Server from loadbalancer
     shell: echo This sever {{ inventory_hostname }} was unregistered from LB, node name is {{ ansible_nodename }} >> /home/user/log.ansible.txt
     delegate_to: 127.0.0.1
+  
+  - name: Update DB
+    shell: echo Command for update DB... 
+    run_once: true #run command in one server  
 
   - name: Create file1
     copy:
