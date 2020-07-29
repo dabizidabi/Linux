@@ -1,0 +1,20 @@
+Redirect STDOUT and STDERR use >$
+redirect STDERR only 2>
+
+find / -name core 2> /dev/null
+find / -name core > /tmp/corefiles 2> /dev/null
+find / -name core 2> /dev/null | less
+cut -d: -f7 < /etc/passwd | sort -u
+mkdir foo && cd foo
+cd foo || echo "No such directory" #execute te following command if the precrding fails
+mkdir foo; cd foo; touch test.txt
+
+etcdir='/etc'
+echo $etcdir
+
+sort -t: -k3,3 -n /etc/group #sort by numerically
+sort -t: -k3,3 /etc/group #sort alphabetically
+
+du -sh /usr/* | sort -h
+
+cut -d: -f7 /etc/passwd | sort | uniq -c
