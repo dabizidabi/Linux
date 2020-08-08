@@ -1,9 +1,13 @@
 Redirect STDOUT and STDERR use >$
 redirect STDERR only 2>
+$# contains the number of command-line arguemnts
+$* contains all arguments
+$? contains the exit status of the last command executed
 
 find / -name core 2> /dev/null
 find / -name core > /tmp/corefiles 2> /dev/null
 find / -name core 2> /dev/null | less
+find / -type f -size +1M -print0 | xargs -0 ls -l #find names with whitespace contained within file names
 cut -d: -f7 < /etc/passwd | sort -u
 mkdir foo && cd foo
 cd foo || echo "No such directory" #execute te following command if the precrding fails
@@ -18,3 +22,4 @@ sort -t: -k3,3 /etc/group #sort alphabetically
 du -sh /usr/* | sort -h
 
 cut -d: -f7 /etc/passwd | sort | uniq -c
+
