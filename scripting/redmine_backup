@@ -1,0 +1,73 @@
+#!/bin/bash
+BACKUP_DIR="/home/user/redminebackup"
+DOCS_PATH="/usr/share/redmine/files"
+BACKUP_SERVER="172.16.1.200"
+USER="backupcrt"
+PASSWD="k2011crt"
+exec 1>>/home/user/redminebackup.log
+date
+
+[ ! -d $BACKUP_DIR ] && echo "Каталог $BACKUP_DIR не існує. Створюємо..." && mkdir $BACKUP_DIR && echo "Каталог $BACKUP_DIR створено."
+[ ! -d $DOCS_PATH ] && printf "\e[40;0;32mКаталог $DOCS_PATH\e[40;0;31m не знайдений.\e[40;0;37m\nЗавершення сценарію.\n" && exit 1
+
+#exit 0
+printf "Відключення веб-сервера..."
+service apache2 stop
+exit_code=$?
+if [ $exit_code -ne 0 ]
+then
+    printf "\nНеможливо зупинити веб-сервер"
+    exit 1
+else
+    printf " \e[40;0;32mУСПІШНО\e[40;0;37m\n"
+fi
+
+echo "Створення дампу бази даних redmine"
+/usr/bin/mysqldump -u root -proot -h localhost redmine_default > $BACKUP_DIR/redmine.sql
+
+echo "Пакування дампу в архів і, якщо архів створився, видалення дампу"
+cat $BACKUP_DIR/redmine.sql | gzip > $BACKUP_DIR/redmine_database-`date +%Y-%m-%d`.sql.gz && rm $BACKUP_DIR/redmine.sql
+
+printf "Копіювання документів користувачів redmine..."
+# (--preserve=all: зберігати атрибути файлів)
+cp -r --preserve=all $DOCS_PATH $BACKUP_DIR
+
+if [ $exit_code -ne 0 ]
+then
+    printf " \e[40;0;31mНЕВДАЧА\e[40;0;37m\nНеможливо зкопіювати файли\n"
+    exit 1
+else
+    printf " \e[40;0;32mУСПІШНО\e[40;0;37m\n"
+fi
+
+printf "Включення веб-сервера..."
+service apache2 start
+exit_code=$?
+if [ $exit_code -ne 0 ]
+then
+    printf "НЕВДАЧА\nВеб-сервер не включився\n"
+    exit 1
+else
+     printf " \e[40;0;32mУСПІШНО\e[40;0;37m\n"
+fi
+
+printf "Створення файлу архіву документів користувачів..."
+tar cf $BACKUP_DIR/redmine_files-`date +%Y-%m-%d`.tar $BACKUP_DIR/files
+if [ $? -ne 0 ]
+then
+    printf "\e[40;0;31mНЕВДАЧА\e[40;0;37m\nАрхів не створено\n"
+    exit 1
+else
+    printf " \e[40;0;32mУСПІШНО\e[40;0;37m\n"
+fi
+
+cd $BACKUP_DIR
+ftp -n -v $BACKUP_SERVER << EOT
+user $USER $PASSWD
+binary
+cd /ORA-BackUPs/Redmine
+prompt
+mput *.tar *.sql.gz
+close
+bye
+EOT
