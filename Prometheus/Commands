@@ -1,0 +1,4 @@
+Server:
+./prometheus --config.file="/etc/prometheus.yml"
+
+Node exporter:
