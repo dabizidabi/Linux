@@ -1,0 +1,14 @@
+[Unit]
+Description=NodeExporter
+Wants=network-online.target
+After=netwokr-online.target
+
+[Service]
+User=nodeexporter
+Group=nodeexporter
+Type=simple
+
+ExecStart=/usr/local/bin/node_exporter
+
+[Install]
+WantedBy=multi-user.target
