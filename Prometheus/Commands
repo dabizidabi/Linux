@@ -11,6 +11,9 @@ mv consoles /etc/prometheus/ && mv prometheus.yml /etc/prometheus/
 chown -R prometheus:prometheus /etc/prometheus/
 mv prom* /usr/local/bin
 chown prometheus:prometheus /usr/local/bin/prom*
+mv prometheus.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl start/enable prometheus
 
 prometheus.service:
 [Unit]
