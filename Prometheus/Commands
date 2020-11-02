@@ -2,3 +2,33 @@ Server:
 ./prometheus --config.file="/etc/prometheus.yml"
 
 Node exporter:
+
+
+Create service:
+useradd -r -s /bin/false prometheus
+mkdir /etc/prometheus
+mv consoles /etc/prometheus/ && mv prometheus.yml /etc/prometheus/
+chown -R prometheus:prometheus /etc/prometheus/
+mv prom* /usr/local/bin
+chown prometheus:prometheus /usr/local/bin/prom*
+
+prometheus.service:
+[Unit]
+Description=Prometheus
+Wants=network-online.target
+After=netwokr-online.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Type=simple
+
+ExecStart=/usr/local/bin/prometheus \
+ --config.file /etc/prometheus/prometheus.yml \
+ --storage.tsdb.path /opt/prometheus \
+ --web.console.templates=/etc/prometheus/consoles \
+ --web.console.libraries=/etc/prometheus/console_libraries
+ --web.enable-lifecycle
+
+[Install]
+WantedBy=multi-user.target
