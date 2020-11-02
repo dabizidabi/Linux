@@ -4,7 +4,8 @@ Server:
 Node exporter:
 
 
-Create service:
+Create service
+Prometheus.service:
 useradd -r -s /bin/false prometheus
 mkdir /etc/prometheus
 mv consoles /etc/prometheus/ && mv prometheus.yml /etc/prometheus/
@@ -14,3 +15,8 @@ chown prometheus:prometheus /usr/local/bin/prom*
 mv prometheus.service /etc/systemd/system/
 systemctl daemon-reload
 systemctl start/enable prometheus
+
+Node.service:
+useradd -r -s /bin/false nodeexporter
+mv node_exporter /usr/local/bin/
+chown nodeexporter:nodeexporter /usr/local/bin/node*
