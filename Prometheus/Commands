@@ -27,3 +27,4 @@ node_cpu_seconds_total{cpu="0", instance=~".+119.+"}
 sum without(core, mode)(windows_cpu_time_total{mode!="idle"})
 sum without(core, mode)(rate(windows_cpu_time_total{mode!="idle"}[5m]))
 (1 - (node_memory_MemAvailable_bytes/node_memory_MemTotal_bytes)) * 100 <= bool 30
+100 - (avg by (instance) (rate(windows_cpu_time_total{mode="idle"}[30s])) * 100) #example for cpu usage (multiple cores)
