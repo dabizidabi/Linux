@@ -21,7 +21,7 @@ systemctl start/enable prometheus
 Node.service:
 useradd -r -s /bin/false nodeexporter
 mv node_exporter /usr/local/bin/
-chown nodeexporter:nodeexporter /usr/local/bin/node*
+chown nodeexporter:nodeexporter /usr/local/bin/node_exporter
 
 PromQL examples:
 up{job="wmi_exporter"}
