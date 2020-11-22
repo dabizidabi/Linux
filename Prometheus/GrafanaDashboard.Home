@@ -17,7 +17,7 @@
   "gnetId": 11074,
   "graphTooltip": 0,
   "id": 8,
-  "iteration": 1605970702090,
+  "iteration": 1606047819103,
   "links": [
     {
       "asDropdown": true,
@@ -179,7 +179,7 @@
           "mappingType": 1,
           "pattern": "Value #E",
           "thresholds": [
-            "70",
+            "75",
             "85"
           ],
           "type": "number",
@@ -199,8 +199,8 @@
           "mappingType": 1,
           "pattern": "Value #F",
           "thresholds": [
-            "70",
-            "85"
+            "85",
+            "90"
           ],
           "type": "number",
           "unit": "percent"
@@ -219,108 +219,11 @@
           "mappingType": 1,
           "pattern": "Value #G",
           "thresholds": [
-            "70",
-            "85"
+            "80",
+            "90"
           ],
           "type": "number",
           "unit": "percent"
-        },
-        {
-          "alias": "Disk read",
-          "align": "auto",
-          "colorMode": "cell",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value #H",
-          "thresholds": [
-            "10485760",
-            "20485760"
-          ],
-          "type": "number",
-          "unit": "Bps"
-        },
-        {
-          "alias": "Disk write",
-          "align": "auto",
-          "colorMode": "cell",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value #I",
-          "thresholds": [
-            "10485760",
-            "20485760"
-          ],
-          "type": "number",
-          "unit": "Bps"
-        },
-        {
-          "alias": "Download",
-          "align": "auto",
-          "colorMode": "cell",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value #J",
-          "thresholds": [
-            "30485760",
-            "104857600"
-          ],
-          "type": "number",
-          "unit": "bps"
-        },
-        {
-          "alias": "Upload",
-          "align": "auto",
-          "colorMode": "cell",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value #K",
-          "thresholds": [
-            "30485760",
-            "104857600"
-          ],
-          "type": "number",
-          "unit": "bps"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
         },
         {
           "alias": "",
@@ -460,7 +363,7 @@
       "folderId": null,
       "gridPos": {
         "h": 19,
-        "w": 9,
+        "w": 6,
         "x": 13,
         "y": 1
       },
@@ -471,10 +374,12 @@
       "pluginVersion": "7.3.3",
       "show": "current",
       "sortOrder": 1,
-      "stateFilter": [],
+      "stateFilter": [
+        "alerting"
+      ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Panel Title",
+      "title": "Alerts",
       "type": "alertlist"
     },
     {
@@ -536,7 +441,7 @@
           "link": true,
           "linkTargetBlank": false,
           "linkTooltip": "Browse host detail",
-          "linkUrl": "d/ij0E3yoMz/&var-node=${__cell}?orgId=1",
+          "linkUrl": "d/ij0E3yoMz/&var-node=${__cell}?orgId=1&from=now-6h&to=now&refresh=10s",
           "mappingType": 1,
           "pattern": "instance",
           "thresholds": [],
@@ -1155,5 +1060,5 @@
   "timezone": "browser",
   "title": "Main Dashboard",
   "uid": "nR13IYoMk",
-  "version": 23
+  "version": 29
 }
