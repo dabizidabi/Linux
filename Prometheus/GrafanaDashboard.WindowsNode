@@ -16,6 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 14,
+  "iteration": 1606047848297,
   "links": [],
   "panels": [
     {
@@ -70,7 +71,7 @@
       "pluginVersion": "7.3.3",
       "targets": [
         {
-          "expr": "clamp_min(100 - (avg by (instance) (rate(windows_cpu_time_total{job=~\"Windows\",instance=\"172.16.1.28:9182\",mode=\"idle\"}[5m])) * 100), 0)",
+          "expr": "clamp_min(100 - (avg by (instance) (rate(windows_cpu_time_total{job=~\"Windows\",instance=\"$host\",mode=\"idle\"}[5m])) * 100), 0)",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -125,7 +126,7 @@
       "pluginVersion": "7.3.3",
       "targets": [
         {
-          "expr": "windows_cs_logical_processors{job=~\"Windows\",instance=~\"172.16.1.28:9182\"}",
+          "expr": "windows_cs_logical_processors{job=~\"Windows\",instance=~\"$host\"}",
           "instant": false,
           "interval": "",
           "legendFormat": "",
@@ -189,7 +190,7 @@
       "pluginVersion": "7.3.3",
       "targets": [
         {
-          "expr": "100 - 100 * windows_os_physical_memory_free_bytes{job=~\"Windows\", instance=\"172.16.1.28:9182\"} / windows_cs_physical_memory_bytes{job=~\"Windows\",instance=\"172.16.1.28:9182\"}",
+          "expr": "100 - 100 * windows_os_physical_memory_free_bytes{job=~\"Windows\", instance=\"$host\"} / windows_cs_physical_memory_bytes{job=~\"Windows\",instance=\"$host\"}",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -245,7 +246,7 @@
       "pluginVersion": "7.3.3",
       "targets": [
         {
-          "expr": "windows_cs_physical_memory_bytes{job=~\"Windows\",instance=~\"172.16.1.28:9182\"}",
+          "expr": "windows_cs_physical_memory_bytes{job=~\"Windows\",instance=~\"$host\"}",
           "instant": false,
           "interval": "",
           "legendFormat": "",
@@ -302,7 +303,7 @@
       "pluginVersion": "7.3.3",
       "targets": [
         {
-          "expr": "windows_cs_physical_memory_bytes{job=~\"Windows\",instance=~\"172.16.1.28:9182\"} - windows_os_physical_memory_free_bytes{job=~\"Windows\",instance=~\"172.16.1.28:9182\"}",
+          "expr": "windows_cs_physical_memory_bytes{job=~\"Windows\",instance=~\"$host\"} - windows_os_physical_memory_free_bytes{job=~\"Windows\",instance=~\"$host\"}",
           "instant": false,
           "interval": "",
           "legendFormat": "",
@@ -335,7 +336,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 10,
+        "w": 8,
         "x": 12,
         "y": 0
       },
@@ -357,7 +358,7 @@
       "pluginVersion": "7.3.3",
       "targets": [
         {
-          "expr": "windows_logical_disk_size_bytes{job=\"Windows\", instance=\"172.16.1.28:9182\"}",
+          "expr": "windows_logical_disk_size_bytes{job=\"Windows\", instance=\"$host\"}",
           "interval": "",
           "legendFormat": "Disk {{volume}}",
           "refId": "A"
@@ -412,7 +413,7 @@
       "pluginVersion": "7.3.3",
       "targets": [
         {
-          "expr": "time() - windows_system_system_up_time{instance=\"172.16.1.28:9182\"}",
+          "expr": "time() - windows_system_system_up_time{instance=\"$host\"}",
           "instant": false,
           "interval": "",
           "legendFormat": "",
@@ -425,6 +426,41 @@
       "type": "stat"
     },
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                85
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "CPU 172.16.1.28 Used > 85%",
+        "noDataState": "no_data",
+        "notifications": []
+      },
       "aliasColors": {
         "172.16.1.28:9182": "green"
       },
@@ -443,7 +479,7 @@
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 10,
         "x": 0,
         "y": 4
@@ -466,7 +502,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "alertThreshold": false
       },
       "percentage": false,
       "pluginVersion": "7.3.3",
@@ -487,7 +523,15 @@
           "refId": "A"
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": false,
+          "line": false,
+          "op": "gt",
+          "value": 85
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -559,9 +603,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 10,
-        "x": 12,
+        "x": 10,
         "y": 4
       },
       "id": 11,
@@ -580,7 +624,7 @@
       "pluginVersion": "7.3.3",
       "targets": [
         {
-          "expr": "100 - (windows_logical_disk_free_bytes{job=~\"Windows\",instance=~\"172.16.1.28:9182\"} / windows_logical_disk_size_bytes{job=~\"Windows\",instance=~\"172.16.1.28:9182\"})*100",
+          "expr": "100 - (windows_logical_disk_free_bytes{job=~\"Windows\",instance=~\"$host\"} / windows_logical_disk_size_bytes{job=~\"Windows\",instance=~\"$host\"})*100",
           "interval": "",
           "legendFormat": "{{volume}}",
           "refId": "A"
@@ -592,6 +636,201 @@
       "type": "bargauge"
     },
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                85
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "Disk 172.16.1.28 used > 85 %",
+        "noDataState": "no_data",
+        "notifications": []
+      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 10,
+        "x": 10,
+        "y": 11
+      },
+      "hiddenSeries": false,
+      "id": 22,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": false
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "100 - (windows_logical_disk_free_bytes{job=~\"Windows\",instance=~\"172.16.1.28:9182\"} / windows_logical_disk_size_bytes{job=~\"Windows\",instance=~\"172.16.1.28:9182\"})*100",
+          "interval": "",
+          "legendFormat": "{{volume}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": false,
+          "line": false,
+          "op": "gt",
+          "value": 85
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Disk used",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                85
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "avg"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "",
+        "name": "RAM 172.16.1.28 used > 85%",
+        "noDataState": "no_data",
+        "notifications": []
+      },
       "aliasColors": {
         "172.16.1.28:9182": "dark-orange"
       },
@@ -610,10 +849,10 @@
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
+        "h": 8,
         "w": 10,
         "x": 0,
-        "y": 10
+        "y": 12
       },
       "hiddenSeries": false,
       "id": 12,
@@ -633,7 +872,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "alertThreshold": false
       },
       "percentage": false,
       "pluginVersion": "7.3.3",
@@ -654,7 +893,15 @@
           "refId": "A"
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": false,
+          "line": false,
+          "op": "gt",
+          "value": 85
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -697,110 +944,6 @@
       }
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "unit": "binBps"
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 10,
-        "w": 10,
-        "x": 12,
-        "y": 10
-      },
-      "hiddenSeries": false,
-      "id": 14,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.3.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "irate(windows_logical_disk_read_bytes_total{job=~\"Windows\",instance=~\"172.16.1.28:9182\"}[5m])",
-          "interval": "",
-          "legendFormat": "read {{volume}}",
-          "refId": "A"
-        },
-        {
-          "expr": "irate(windows_logical_disk_write_bytes_total{job=~\"Windows\",instance=~\"172.16.1.28:9182\"}[5m])",
-          "interval": "",
-          "legendFormat": "write {{volume}}",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Disk r/w",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "binBps",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
       "aliasColors": {
         "172.16.1.28:9182": "dark-orange",
         "Memory": "dark-orange",
@@ -821,10 +964,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
+        "h": 8,
         "w": 10,
         "x": 0,
-        "y": 17
+        "y": 20
       },
       "hiddenSeries": false,
       "id": 16,
@@ -854,7 +997,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "windows_cs_physical_memory_bytes{job=~\"Windows\",instance=~\"172.16.1.28:9182\"} - windows_os_physical_memory_free_bytes{job=~\"Windows\",instance=~\"172.16.1.28:9182\"}",
+          "expr": "windows_cs_physical_memory_bytes{job=~\"Windows\",instance=~\"$host\"} - windows_os_physical_memory_free_bytes{job=~\"Windows\",instance=~\"$host\"}",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -910,7 +1053,8 @@
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "custom": {},
+          "unit": "binBps"
         },
         "overrides": []
       },
@@ -919,8 +1063,111 @@
       "gridPos": {
         "h": 8,
         "w": 10,
-        "x": 12,
+        "x": 10,
         "y": 20
+      },
+      "hiddenSeries": false,
+      "id": 14,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.3",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(windows_logical_disk_read_bytes_total{job=~\"Windows\",instance=~\"$host\"}[5m])",
+          "interval": "",
+          "legendFormat": "read {{volume}}",
+          "refId": "A"
+        },
+        {
+          "expr": "irate(windows_logical_disk_write_bytes_total{job=~\"Windows\",instance=~\"$host\"}[5m])",
+          "interval": "",
+          "legendFormat": "write {{volume}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Disk r/w",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "binBps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 20,
+        "x": 0,
+        "y": 28
       },
       "hiddenSeries": false,
       "id": 21,
@@ -950,13 +1197,13 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(windows_net_bytes_sent_total{job=~\"Windows\",instance=~\"172.16.1.28:9182\",nic!~'isatap.*|VPN.*'}[5m])*8>0",
+          "expr": "irate(windows_net_bytes_sent_total{job=~\"Windows\",instance=~\"$host\",nic!~'isatap.*|VPN.*'}[5m])*8>0",
           "interval": "",
           "legendFormat": "{{nic}}-Sent",
           "refId": "A"
         },
         {
-          "expr": "irate(windows_net_bytes_received_total{job=~\"Windows\",instance=~\"172.16.1.28:9182\",nic!~'isatap.*|VPN.*'}[5m])*8",
+          "expr": "irate(windows_net_bytes_received_total{job=~\"Windows\",instance=~\"$host\",nic!~'isatap.*|VPN.*'}[5m])*8",
           "interval": "",
           "legendFormat": "{{nic}}-Received",
           "refId": "B"
@@ -1004,16 +1251,41 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "10s",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "172.16.1.28:9182",
+          "value": "172.16.1.28:9182"
+        },
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "host",
+        "options": [
+          {
+            "selected": true,
+            "text": "172.16.1.28:9182",
+            "value": "172.16.1.28:9182"
+          }
+        ],
+        "query": "172.16.1.28:9182",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
   },
   "time": {
-    "from": "2020-11-21T07:29:56.871Z",
-    "to": "2020-11-21T08:12:29.796Z"
+    "from": "now-6h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -1032,5 +1304,5 @@
   "timezone": "",
   "title": "172.16.1.28",
   "uid": "ij0E3yoMz",
-  "version": 15
+  "version": 27
 }
