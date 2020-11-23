@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 11074,
   "graphTooltip": 0,
-  "id": 8,
-  "iteration": 1606047819103,
+  "id": 19,
+  "iteration": 1606134692047,
   "links": [
     {
       "asDropdown": true,
@@ -93,7 +93,7 @@
           "unit": "bytes"
         },
         {
-          "alias": "IP（Link to details）",
+          "alias": "IP",
           "align": "auto",
           "colorMode": null,
           "colors": [
@@ -103,7 +103,7 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
-          "link": true,
+          "link": false,
           "linkTargetBlank": false,
           "linkTooltip": "Browse host details",
           "linkUrl": "d/xfpJB9FGz/node-exporter?orgId=1&var-job=${job}&var-hostname=All&var-node=${__cell}&var-device=All&var-origin_prometheus=$origin_prometheus",
@@ -351,6 +351,37 @@
       "type": "table-old"
     },
     {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "folderId": 0,
+      "gridPos": {
+        "h": 19,
+        "w": 3,
+        "x": 13,
+        "y": 1
+      },
+      "headings": false,
+      "id": 203,
+      "limit": 60,
+      "pluginVersion": "7.3.3",
+      "query": "",
+      "recent": false,
+      "search": true,
+      "starred": false,
+      "tags": [
+        "hosts"
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Hosts",
+      "type": "dashlist"
+    },
+    {
       "dashboardFilter": "",
       "dashboardTags": [],
       "datasource": null,
@@ -364,7 +395,7 @@
       "gridPos": {
         "h": 19,
         "w": 6,
-        "x": 13,
+        "x": 16,
         "y": 1
       },
       "id": 201,
@@ -428,7 +459,7 @@
           "unit": "bytes"
         },
         {
-          "alias": "IP（Link to details）",
+          "alias": "IP",
           "align": "auto",
           "colorMode": null,
           "colors": [
@@ -438,10 +469,10 @@
           ],
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
-          "link": true,
+          "link": false,
           "linkTargetBlank": false,
           "linkTooltip": "Browse host detail",
-          "linkUrl": "d/ij0E3yoMz/&var-node=${__cell}?orgId=1&from=now-6h&to=now&refresh=10s",
+          "linkUrl": "&var-node=${__cell}?orgId=1&from=now-6h&to=now&refresh=10s$",
           "mappingType": 1,
           "pattern": "instance",
           "thresholds": [],
@@ -814,51 +845,21 @@
         "auto_min": "10s",
         "current": {
           "selected": false,
-          "text": "2m",
-          "value": "2m"
+          "text": "5m",
+          "value": "5m"
         },
         "error": null,
-        "hide": 0,
+        "hide": 2,
         "label": "Interval",
         "name": "interval",
         "options": [
           {
-            "selected": false,
-            "text": "30s",
-            "value": "30s"
-          },
-          {
-            "selected": false,
-            "text": "1m",
-            "value": "1m"
-          },
-          {
             "selected": true,
-            "text": "2m",
-            "value": "2m"
-          },
-          {
-            "selected": false,
-            "text": "3m",
-            "value": "3m"
-          },
-          {
-            "selected": false,
             "text": "5m",
             "value": "5m"
-          },
-          {
-            "selected": false,
-            "text": "10m",
-            "value": "10m"
-          },
-          {
-            "selected": false,
-            "text": "30m",
-            "value": "30m"
           }
         ],
-        "query": "30s,1m,2m,3m,5m,10m,30m",
+        "query": "5m",
         "queryValue": "",
         "refresh": 2,
         "skipUrlSync": false,
@@ -1060,5 +1061,5 @@
   "timezone": "browser",
   "title": "Main Dashboard",
   "uid": "nR13IYoMk",
-  "version": 29
+  "version": 11
 }
