@@ -17,7 +17,7 @@
   "gnetId": 11074,
   "graphTooltip": 0,
   "id": 19,
-  "iteration": 1606134692047,
+  "iteration": 1606156076003,
   "links": [
     {
       "asDropdown": true,
@@ -60,7 +60,7 @@
       "fontSize": "80%",
       "gridPos": {
         "h": 10,
-        "w": 13,
+        "w": 12,
         "x": 0,
         "y": 1
       },
@@ -351,6 +351,152 @@
       "type": "table-old"
     },
     {
+      "columns": [],
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fontSize": "80%",
+      "gridPos": {
+        "h": 19,
+        "w": 3,
+        "x": 12,
+        "y": 1
+      },
+      "id": 204,
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {
+        "col": 31,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "IP",
+          "align": "auto",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 1,
+          "link": false,
+          "linkTooltip": "",
+          "linkUrl": "",
+          "mappingType": 1,
+          "pattern": "instance",
+          "thresholds": [],
+          "type": "string",
+          "unit": "bytes"
+        },
+        {
+          "alias": "Status",
+          "align": "auto",
+          "colorMode": "cell",
+          "colors": [
+            "#E02F44",
+            "#E02F44",
+            "#37872D"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "link": false,
+          "linkTargetBlank": false,
+          "linkTooltip": "Browse host detail",
+          "linkUrl": "&var-node=${__cell}?orgId=1&from=now-6h&to=now&refresh=10s$",
+          "mappingType": 1,
+          "pattern": "Value #D",
+          "thresholds": [
+            "0",
+            "1"
+          ],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "align": "right",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "expr": "probe_success{job=\"$job_network\"}",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "expr": "count(probe_success{job=\"blackbox\"})by (instance)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "D"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Network，Total：$total】",
+      "transform": "table",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "Value #A": 6,
+              "Value #B": 8,
+              "Value #C": 9,
+              "Value #D": 7,
+              "Value #E": 14,
+              "Value #F": 12,
+              "Value #G": 13,
+              "Value #H": 15,
+              "Value #I": 16,
+              "Value #J": 19,
+              "Value #K": 20,
+              "Value #L": 11,
+              "Value #M": 17,
+              "Value #N": 18,
+              "__name__": 10,
+              "domain": 1,
+              "fqdn": 2,
+              "hostname": 4,
+              "instance": 3,
+              "job": 5
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table-old"
+    },
+    {
       "datasource": null,
       "fieldConfig": {
         "defaults": {
@@ -361,8 +507,39 @@
       "folderId": 0,
       "gridPos": {
         "h": 19,
-        "w": 3,
-        "x": 13,
+        "w": 2,
+        "x": 15,
+        "y": 1
+      },
+      "headings": false,
+      "id": 205,
+      "limit": 60,
+      "pluginVersion": "7.3.3",
+      "query": "",
+      "recent": false,
+      "search": true,
+      "starred": false,
+      "tags": [
+        "network"
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Network Hosts",
+      "type": "dashlist"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "folderId": 0,
+      "gridPos": {
+        "h": 19,
+        "w": 2,
+        "x": 17,
         "y": 1
       },
       "headings": false,
@@ -394,8 +571,8 @@
       "folderId": null,
       "gridPos": {
         "h": 19,
-        "w": 6,
-        "x": 16,
+        "w": 5,
+        "x": 19,
         "y": 1
       },
       "id": 201,
@@ -426,7 +603,7 @@
       "fontSize": "80%",
       "gridPos": {
         "h": 9,
-        "w": 13,
+        "w": 12,
         "x": 0,
         "y": 11
       },
@@ -923,8 +1100,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "3",
-          "value": "3"
+          "text": "4",
+          "value": "4"
         },
         "datasource": "Prometheus",
         "definition": "query_result(count(node_uname_info{origin_prometheus=~\"$origin_prometheus\",job=~\"$job\"}))",
@@ -1028,6 +1205,60 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "blackbox",
+          "value": "blackbox"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(probe_success{origin_prometheus=~\"$origin_prometheus\"}, job)",
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": "System",
+        "multi": false,
+        "name": "job_network",
+        "options": [],
+        "query": "label_values(probe_success{origin_prometheus=~\"$origin_prometheus\"}, job)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "172.16.0.25",
+          "value": "172.16.0.25"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(probe_success{job=~\"$job_network\"},instance)",
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "node_network",
+        "options": [],
+        "query": "label_values(probe_success{job=~\"$job_network\"},instance)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
@@ -1061,5 +1292,5 @@
   "timezone": "browser",
   "title": "Main Dashboard",
   "uid": "nR13IYoMk",
-  "version": 11
+  "version": 13
 }
