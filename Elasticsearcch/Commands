@@ -1,0 +1,3 @@
+GET /_cat/nodes?v 
+GET /_cluster/health
+GET /_cat/indices?v
