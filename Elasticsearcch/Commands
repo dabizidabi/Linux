@@ -3,3 +3,45 @@ GET /_cluster/health
 GET /_cat/indices?v
 PUT /test
 DELETE /test
+
+Create indences:
+PUT /products
+{
+  "settings": {
+    "number_of_shards": 2,
+    "number_of_replicas": 2
+  }
+}
+
+Create docs:
+POST /products/_doc
+{
+  "name": "Test",
+  "numbertest": 100,
+  "variable": 10
+}
+
+PUT /products/_doc/100
+{
+  "name": "Test02",
+  "numbertest": 110,
+  "variable": 5
+}
+
+GET /products/_doc/100
+
+Update:
+POST /products/_update/100
+{
+  "doc": {
+    "name": "Test003"
+  }
+}
+
+
+POST /products/_update/100
+{
+  "doc": {
+    "tags": ["test001"]
+  }
+}
