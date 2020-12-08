@@ -1,1 +1,1 @@
-/bin/logstash -f /pipeline.conf --config-reload.automatic
+/bin/logstash -f /pipeline.conf --config.reload.automatic
