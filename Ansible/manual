@@ -21,7 +21,8 @@ ansible-inventory --graph #show tree group servers
 
 PLAYBOOKS:
 
-ansible-palybook myolaybook1.yml #run playbook
+ansible-palybook -i invenhory.txt myolaybook1.yml #run playbook
+
 
 ROLES:
 ansible-galaxy init test_deploy

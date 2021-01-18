@@ -1,0 +1,5 @@
+[test1]
+target1 ansible_host=192.168.0.102 ansible_connection=ssh
+
+[test2]
+target2 ansible_host=192.168.0.103 ansible_connection=ssh

@@ -1,6 +1,6 @@
 -
   name:  Intall prometheus
-  hosts: prometheus-srv
+  hosts: [test2]
   roles:
           - role: cloudalchemy.prometheus
             become: yes
