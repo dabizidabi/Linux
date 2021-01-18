@@ -18,6 +18,8 @@ ansible all -m uri -a "url=https://google.com" #test connection to website
 
 ansible-inventory --list #list all servers
 ansible-inventory --graph #show tree group servers 
+# Dump facts for host "some_host" which is defined inside inventory_file.txt
+ansible -i inventory_file.txt some_host -m setup 
 
 PLAYBOOKS:
 
