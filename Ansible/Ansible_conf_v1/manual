@@ -25,6 +25,11 @@ ansible-palybook myolaybook1.yml #run playbook
 
 ROLES:
 ansible-galaxy init test_deploy
+default_path: /etc/ansible/roles or add roles_path = /etc/asible/roles in ansible.cfg
+ansible-galaxy install cloudalchemy.prometheus
 
 EXTRA-VARS
 ansible-laybook playbook1.yml --extra-var "MYHOSTS=test_servers"
+
+Ansible-GALAXY
+
