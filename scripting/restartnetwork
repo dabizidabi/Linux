@@ -1,0 +1,11 @@
+#!/bin/bash
+ping -c 4  172.16.1.75
+StatusPing=$?
+if [ $StatusPing -ne 0 ]; then
+        service networking restart
+        StatusService=$?
+        if [ $StatusService -ne 0 ]; then
+                sleep 30
+                service networking restart
+        fi
+fi
