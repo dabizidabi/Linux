@@ -2,8 +2,8 @@
 BACKUP_DIR="/home/user/redminebackup"
 DOCS_PATH="/usr/share/redmine/files"
 BACKUP_SERVER="172.16.1.200"
-USER="backupcrt"
-PASSWD="k2011crt"
+USER="backupcrt202121"
+PASSWD="k2011crt2021"
 exec 1>>/home/user/redminebackup.log
 date
 
