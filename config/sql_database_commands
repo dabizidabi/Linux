@@ -3,3 +3,5 @@ show databases;
 create database people;
 se people;
 create table register (id int(3), name varchar(50), lastname varchar(50), age int(3));
+show tables;
+desc register;
