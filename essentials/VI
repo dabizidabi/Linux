@@ -84,5 +84,6 @@ CTRL+J отредактировать команду с истории
 
 
 :set nu #add numeric string
+:set nu! #off numeric string
 :34,57s/^/# / #comments string 34-57
-:nuh #disable highlighting 
+:noh #disable highlighting 
