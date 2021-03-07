@@ -7,38 +7,42 @@ provider "aws" {
 resource "aws_vpc" "staging_vpc" {
   cidr_block = var.cidr_block_vpc
 
-  tags = merge(var.common_tags, { Name = "${var.common_tags["environment"]} vpc" })
+  tags = merge(var.common_tags, { Name = "${var.common_tags["environment"]}_vpc" })
 }
 
 #Create subnets
 resource "aws_subnet" "private_subnets" {
+  count             = length(var.net_private_cidr_blocks)
   vpc_id            = aws_vpc.staging_vpc.id
-  cidr_block        = var.net_private_cidr_blocks
-  availability_zone = var.azs
+  cidr_block        = element(var.net_private_cidr_blocks, count.index)
+  availability_zone = element(var.azs, count.index)
 
-  tags = merge(var.common_tags, { Name = "${var.common_tags["environment"]} private subnet" })
+  tags = merge(var.common_tags, { Name = "${var.common_tags["environment"]}_private" })
 }
 
 resource "aws_subnet" "public_subnets" {
+  count             = length(var.net_public_cidr_blocks)
   vpc_id            = aws_vpc.staging_vpc.id
-  cidr_block        = var.net_public_cidr_blocks
-  availability_zone = var.azs
+  cidr_block        = element(var.net_public_cidr_blocks, count.index)
+  availability_zone = element(var.azs, count.index)
 
   tags = merge(var.common_tags, { Name = "${var.common_tags["environment"]}_public" })
 }
 
 resource "aws_subnet" "database_subnets" {
+  count             = length(var.net_database_cidr_blocks)
   vpc_id            = aws_vpc.staging_vpc.id
-  cidr_block        = var.net_database_cidr_blocks
-  availability_zone = var.azs
+  cidr_block        = element(var.net_database_cidr_blocks, count.index)
+  availability_zone = element(var.azs, count.index)
 
   tags = merge(var.common_tags, { Name = "${var.common_tags["environment"]}_database" })
 }
 
 resource "aws_subnet" "elasticache_subnets" {
+  count             = length(var.net_elasticache_cidr_blocks)
   vpc_id            = aws_vpc.staging_vpc.id
-  cidr_block        = var.net_elasticache_cidr_blocks
-  availability_zone = var.azs
+  cidr_block        = element(var.net_elasticache_cidr_blocks, count.index)
+  availability_zone = element(var.azs, count.index)
 
   tags = merge(var.common_tags, { Name = "${var.common_tags["environment"]}_elasticache" })
 }
@@ -47,7 +51,7 @@ resource "aws_subnet" "elasticache_subnets" {
 resource "aws_internet_gateway" "vpc-gw" {
   vpc_id = aws_vpc.staging_vpc.id
 
- tags = merge(var.common_tags, { Name = "${var.common_tags["environment"]}_gw" })
+  tags = merge(var.common_tags, { Name = "${var.common_tags["environment"]}_gw" })
 }
 
 #Create routes for vpc and subnets

@@ -7,7 +7,7 @@ variable "region" {
 variable "azs" {
   description = "Availability zones for subnets"
   type        = list(any)
-  default     = ["eu-east-2a", "eu-east-2b", "eu-east-2c"]
+  default     = ["us-east-2a", "us-east-2b", "us-east-2c"]
 }
 
 variable "cidr_block_vpc" {
