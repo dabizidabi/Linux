@@ -1,0 +1,23 @@
+StrictHostKeyChecking=no
+ServerAliveCountMax 30
+ServerAliveInterval 60
+LogLevel error
+UserKnownHostsFile /dev/null
+AddKeysToAgent yes
+ForwardAgent no
+ForwardX11 no
+ForwardX11Trusted yes
+ControlMaster no
+
+Host *.compute.internal 10.*
+  ProxyCommand  ssh name.host.com netcat -w 120 %h %p
+  User YOUR_USERNAME
+  IdentityFile ~/.ssh/id_rsa
+
+Host name.host.com
+  User YOUR_USERNAME
+  IdentityFile ~/.ssh/id_rsa
+
+Host *.amazonaws.com
+  User YOUR_USERNAME
+  IdentityFile ~/.ssh/id_rsa
