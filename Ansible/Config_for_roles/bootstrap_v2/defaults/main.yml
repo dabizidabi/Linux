@@ -1,0 +1,15 @@
+---
+required_packages:
+  - vim
+  - curl
+  - mc
+
+users:
+  - name: user1
+    state: present
+    key: "{{ lookup('file', '/home/user1/.ssh/id_rsa.pub') }}"
+    groups: 'adm, admin, wheel'
+  - name: user2
+    state: present
+    key: "{{ lookup('file', '/home/user2/.ssh/id_rsa.pub') }}"
+    groups: 'adm, admin, wheel'

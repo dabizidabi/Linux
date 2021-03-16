@@ -1,0 +1,33 @@
+---
+# tasks file for bootstrap_v2
+ - name: install minimal required packages
+   yum:
+      name: "{{ required_packages }}"
+      state: present
+   tags:
+     - packages
+
+ - name: Add users
+   user:
+      name: "{{ item.name }}"
+      shell: /bin/bash
+      group: "{{ item.name }}"
+      groups: "{{ item.groups }}"
+      append: yes
+      create_home: yes
+   loop: "{{ users }}"
+   loop_control:
+     label: '{{ item.name }}'
+   tags:
+     - users
+
+ - name: Add ssh users public keys
+   authorized_key:
+     user: "{{ item.name }}"
+     key: "{{ item.key }}"
+   loop: "{{ users }}"
+   when: user.key is defined
+   loop_control:
+     label: '{{ item.name }}'
+   tags:
+     - keys
