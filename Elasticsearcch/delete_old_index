@@ -1,0 +1,37 @@
+{
+  "policy": {
+    "description": "hot-warm-delete workflow.",
+    "default_state": "hot",
+    "schema_version": 1,
+    "states": [{
+        "name": "hot",
+        "actions": [],
+        "transitions": [{
+          "state_name": "delete",
+          "conditions": {
+            "min_index_age": "30d"
+          }
+        }]
+      },
+      {
+        "name": "delete",
+        "actions": [{
+            "notification": {
+              "destination": {
+                "chime": {
+                  "url": "<URL>"
+                }
+              },
+              "message_template": {
+                "source": "The index {{ctx.index}} is being deleted."
+              }
+            }
+          },
+          {
+            "delete": {}
+          }
+        ]
+      }
+    ]
+  }
+}
