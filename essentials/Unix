@@ -23,3 +23,7 @@ find /home/test -type f -name 'file-a' -exec tar rf test.tar '{}' '+'
 
 -----zip------
 find /home/test -type f -name 'file-a' | zip -@ file-A.zip
+
+
+netstat -an | grep -i listen
+sudo lsof -i:22
