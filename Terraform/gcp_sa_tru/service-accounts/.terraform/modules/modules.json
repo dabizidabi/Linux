@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"service_accounts","Source":"../../../modules/gcp_service_accounts","Dir":"../../../modules/gcp_service_accounts"},{"Key":"service-accounts","Source":"../../../modules/gcp_service_accounts","Dir":"../../../modules/gcp_service_accounts"},{"Key":"","Source":"","Dir":"."}]}
