@@ -87,3 +87,10 @@ CTRL+J отредактировать команду с истории
 :set nu! #off numeric string
 :34,57s/^/# / #comments string 34-57
 :noh #disable highlighting 
+
+
+    press ctrl and v // start select
+    press shift and i // then type in any text
+    press esc esc // press esc twice
+
+
