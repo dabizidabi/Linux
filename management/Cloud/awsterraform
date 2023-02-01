@@ -14,5 +14,11 @@ RUN curl -o /tmp/helm.tar.gz -LO https://get.helm.sh/helm-v3.11.0-linux-amd64.ta
     && mv /tmp/Helm/helm /usr/local/bin/ \
     && helm version
 
-#clear installations
+#get kubectl
+RUN curl -o /tmp/kubectl -LO https://dl.k8s.io/release/v1.26.1/bin/linux/amd64/kubectl \
+    && chmod +x /tmp/kubectl \
+    && mv /tmp/kubectl /usr/local/bin/kubectl \
+    && kubectl
+
+#clear temp files
 RUN rm -rf /tmp/* 
