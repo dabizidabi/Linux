@@ -1,9 +1,18 @@
 FROM amazon/aws-cli:2.9.16
 
-RUN yum install -y jq gzip nano tar git unzip wget
+RUN yum install -y jq gzip nano tar git unzip wget && yum -y clean all && rm -rf /var/cache
 
 #get terraform
 RUN curl -o /tmp/terraform.zip -LO https://releases.hashicorp.com/terraform/1.3.7/terraform_1.3.7_linux_amd64.zip \
     && unzip /tmp/terraform.zip \
     && chmod +x terraform && mv terraform /usr/local/bin/ \
     && terraform -version
+
+#get helm
+RUN curl -o /tmp/helm.tar.gz -LO https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz \
+    && mkdir /tmp/Helm && tar -zxvf /tmp/helm.tar.gz -C /tmp/Helm --strip-components 1 \
+    && mv /tmp/Helm/helm /usr/local/bin/ \
+    && helm version
+
+#clear installations
+RUN rm -rf /tmp/* 
