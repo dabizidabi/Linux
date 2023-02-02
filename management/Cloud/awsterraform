@@ -22,3 +22,7 @@ RUN curl -o /tmp/kubectl -LO https://dl.k8s.io/release/v1.26.1/bin/linux/amd64/k
 
 #clear temp files
 RUN rm -rf /tmp/* 
+
+RUN useradd -m 1000
+
+USER 1000
