@@ -1,0 +1,58 @@
+version: "3.9"
+services:
+  ansible-control-plane:
+    container_name: ansible-control
+    image: ubuntu-ansible
+    build:
+      context: ./Docker_ansible_ctrl_plane
+    entrypoint: /bin/sh
+    tty: true
+    volumes:
+    - ./:/work
+    ports:
+    - "2222:22"
+    networks:
+    - ansible-network
+  db01:
+    container_name: db01
+    image: ubuntu
+    build:
+      context: ./Docker_hosts
+#    entrypoint: /bin/sh
+    tty: true
+    ports:
+    - "2210:22"
+    networks:
+    - ansible-network
+  web01:
+    container_name: web01
+    image: ubuntu
+#    entrypoint: /bin/sh
+    tty: true
+    ports:
+    ports:
+    - "2211:22"
+    networks:
+    - ansible-network
+  web02:
+    container_name: web02
+    image: ubuntu
+#    entrypoint: /bin/sh
+    tty: true
+    ports:
+    ports:
+    - "2212:22"
+    networks:
+    - ansible-network
+  loadbalancer:
+    container_name: loadbalancer
+    image: ubuntu
+#    entrypoint: /bin/sh
+    tty: true
+    ports:
+    ports:
+    - "2213:22"
+    networks:
+    - ansible-network
+networks:
+  ansible-network:
