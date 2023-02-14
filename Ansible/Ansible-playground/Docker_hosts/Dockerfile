@@ -6,6 +6,7 @@ RUN set -eux; \
                 openssh-server \
 		inetutils-ping \
                 dumb-init \
+                python-is-python3 \
 	; \
 	rm -rf /var/lib/apt/lists/*
 

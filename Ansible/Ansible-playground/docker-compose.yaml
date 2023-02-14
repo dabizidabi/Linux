@@ -5,10 +5,13 @@ services:
     image: ubuntu-ansible
     build:
       context: ./Docker_ansible_ctrl_plane
+    environment: 
+    - ANSIBLE_HOST_KEY_CHECKING=False
     entrypoint: /bin/sh
     tty: true
     volumes:
     - ./:/work
+    working_dir: /work
     ports:
     - "2222:22"
     networks:
