@@ -5,6 +5,7 @@ RUN set -eux; \
 	apt-get install -y --no-install-recommends \
                 openssh-server \
 		inetutils-ping \
+                dumb-init \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
@@ -15,4 +16,4 @@ RUN chmod 600 ~/.ssh/authorized_keys
 
 RUN service ssh start
 
-CMD ["/usr/sbin/sshd","-D"]
+CMD ["dumb-init", "/usr/sbin/sshd", "-D"]
