@@ -1,0 +1,14 @@
+server {
+	listen {{ http_port }} default_server;
+
+	root {{ nginx_site_root_directory }};
+
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name _;
+
+	location / {
+	
+		try_files $uri $uri/ =404;
+	}
+}

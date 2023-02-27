@@ -1,0 +1,12 @@
+- name: Set nginx proxy config
+  template: src=testsite.j2 dest="/etc/nginx/sites-enabled/testsite"
+
+- name: Remove defaults
+  file: path="/etc/nginx/sites-enabled/default" state=absent
+
+- name: Test nginx config & restart
+  shell: nginx -t
+  
+- name: restart nginx
+  service: name=nginx state=restarted
+  notify:  ensure nginx is running

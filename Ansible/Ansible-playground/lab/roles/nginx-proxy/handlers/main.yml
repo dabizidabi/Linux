@@ -1,0 +1,7 @@
+---
+# handlers file for roles/nginx-proxy
+
+- name: ensure nginx is running
+  service:
+    name: nginx
+    state: started

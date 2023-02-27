@@ -1,0 +1,3 @@
+---
+# tasks file for role/nginx
+- include: nginx_install.yml

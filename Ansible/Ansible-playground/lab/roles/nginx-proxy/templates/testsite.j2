@@ -1,0 +1,15 @@
+    #{{ ansible_facts['nodename'] }}
+
+    upstream webservers {
+        {% for host in groups['webservers'] %}
+        server {{ host }}:{{ http_port }};
+        {% endfor %}
+    }
+
+    server {
+        listen 8000;
+
+        location / {   
+                proxy_pass http://webservers;
+        }
+    }

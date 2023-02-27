@@ -1,0 +1,52 @@
+---
+
+- name: Update APT package cache
+  apt: update_cache=yes cache_valid_time=3600
+  ignore_errors: yes
+
+- name: check nginx
+  apt: 
+    name: nginx
+    state: latest
+
+- name: 'Put the nginx.conf file in place'
+  copy:
+    src: "{{ nginx_conf_file }}"
+    dest: "{{ nginx_base_directory }}"
+    owner: www-data
+    mode: '0644'
+
+- name: Template nginx config
+  template:
+    src: "{{ nginx_sites_enabled_template }}"
+    dest: "{{ nginx_sites_available_path }}/default"
+    owner: www-data
+    mode: "0644"
+
+- name: 'Symlink config to enabled sites'
+  file:
+    src: "{{ nginx_sites_available_path }}/default"
+    dest: "{{ nginx_sites_enabled_path }}/default"
+    state: link
+
+- name: 'Put the index.html file in place'
+  template:
+    src: "{{ nginx_site_index_html }}"
+    dest: "{{ nginx_site_root_directory }}/index.html"
+    owner: www-data
+    mode: '0644'
+
+- name: Test nginx config & restart
+  shell: nginx -t
+  register: configuration_test
+  
+- name: 'reload-nginx'
+  service:
+    name: nginx
+    state: reloaded
+  when: configuration_test.rc == 0
+
+- name: ensure nginx is running
+  service:
+    name: nginx
+    state: started

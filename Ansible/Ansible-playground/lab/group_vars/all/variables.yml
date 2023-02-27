@@ -1,0 +1,10 @@
+http_port: 8000
+https_port: 4443
+html_welcome_msg: "Hi!"
+nginx_conf_file: templates/nginx.conf
+nginx_base_directory: /etc/nginx
+nginx_sites_enabled_template: templates/default.j2
+nginx_sites_available_path: /etc/nginx/sites-available
+nginx_sites_enabled_path: /etc/nginx/sites-enabled
+nginx_site_index_html: templates/index.html.j2
+nginx_site_root_directory: /var/www/html
