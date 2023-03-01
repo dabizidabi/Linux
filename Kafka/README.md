@@ -6,7 +6,7 @@ docker build -t kafka:3.4 .
 docker build -t zookeeper:3.4 -f conf/zookeeper/Dockerfile conf/zookeeper/
 
 #Build kafka image with KRaft
-docker build -t kafkakraft:3.4 -f conf/kafka-KRaft/Dockerfile conf/kafka-KRaft
+docker build -t kafkakraft:3.4 -f conf/kafka-KRaft/Dockerfile conf/kafka-KRaft/
 
 ```
 
@@ -27,3 +27,17 @@ kafka:3.4
 
 docker logs zookeeper-1
 ```
+
+Create topic
+/kafka/bin/kafka-topics.sh \
+--create \
+--bootstrap-server kafka-1:9092 \
+--replication-factor 1 \
+--partitions 3 \
+--topic Tests
+
+Describe topic
+/kafka/bin/kafka-topics.sh \
+--describe \
+--topic Tests2 \
+--bootstrap-server kafka-1:9092
