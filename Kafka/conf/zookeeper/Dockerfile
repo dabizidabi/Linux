@@ -51,12 +51,12 @@ RUN set -ux && \
     groupadd -r kafka && \
     useradd -r -g kafka -d /kafka -s /sbin/nologin kafka
 
-COPY start-kafka.sh  /usr/bin
+COPY start-zookeeper.sh  /usr/bin
 
 RUN chown -R kafka:kafka /kafka && \
-    chmod +x  /usr/bin/start-kafka.sh
+    chmod +x  /usr/bin/start-zookeeper.sh
 
 USER kafka
 WORKDIR /kafka
 
-CMD ["start-kafka.sh"]
+CMD ["start-zookeeper.sh"]
