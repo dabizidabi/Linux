@@ -28,6 +28,7 @@ kafka:3.4
 docker logs zookeeper-1
 ```
 
+```
 Create topic
 /kafka/bin/kafka-topics.sh \
 --create \
@@ -39,5 +40,6 @@ Create topic
 Describe topic
 /kafka/bin/kafka-topics.sh \
 --describe \
---topic Tests2 \
+--topic Tests \
 --bootstrap-server kafka-1:9092
+```
