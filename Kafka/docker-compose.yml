@@ -1,0 +1,74 @@
+version: "3.9"
+services:
+  zookeeper: 
+    container_name: zookeeper-1
+    image: zookeeper:3.4
+    build:
+      context: ./conf/zookeeper
+    working_dir: /kafka
+    volumes:
+    - ./conf/zookeeper/zookeeper.properties:/kafka/config/zookeeper.properties
+    networks:
+    - kafka
+  kafka-1:
+    container_name: kafka-1
+    image: kafka:3.4
+    build:
+      context: ./
+    depends_on: 
+    - zookeeper
+    working_dir: /kafka
+    volumes:
+    - ./conf/kafka-1/server.properties:/kafka/config/server.properties
+    networks:
+    - kafka
+  kafka-2:
+    container_name: kafka-2
+    image: kafka:3.4
+    build:
+      context: ./
+    depends_on: 
+    - zookeeper
+    working_dir: /kafka
+    volumes:
+    - ./conf/kafka-2/server.properties:/kafka/config/server.properties
+    networks:
+    - kafka
+  kafka-3:
+    container_name: kafka-3
+    image: kafka:3.4
+    build:
+      context: ./
+    depends_on: 
+    - zookeeper
+    working_dir: /kafka
+    volumes:
+    - ./conf/kafka-3/server.properties:/kafka/config/server.properties
+    networks:
+    - kafka
+  kafka-producer:
+    container_name: kafka-producer
+    image: kafka:3.4
+    build: 
+      context: .
+    working_dir: /kafka
+    entrypoint: /bin/bash
+    stdin_open: true
+    tty: true
+    networks:
+    - kafka
+  kafka-consumer:
+    container_name: kafka-consumer
+    image: kafka:3.4
+    build: 
+      context: .
+    working_dir: /kafka
+    entrypoint: /bin/bash
+    stdin_open: true
+    tty: true
+    networks:
+    - kafka
+
+networks:
+  kafka:
+    driver: bridge
