@@ -44,8 +44,7 @@ Describe topic
 --bootstrap-server kafka-1:9092
 ```
 
-```
-Tests topic
+```Tests topic
 /kafka/bin/kafka-console-consumer.sh \
 --bootstrap-server kafka-1:9092,kafka-2:9092,kafka-3:9092 \
 --topic Tests --from-beginning
