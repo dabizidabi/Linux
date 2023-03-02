@@ -33,7 +33,7 @@ Create topic
 /kafka/bin/kafka-topics.sh \
 --create \
 --bootstrap-server kafka-1:9092 \
---replication-factor 1 \
+--replication-factor 3 \
 --partitions 3 \
 --topic Tests
 
@@ -42,4 +42,22 @@ Describe topic
 --describe \
 --topic Tests \
 --bootstrap-server kafka-1:9092
+```
+
+```
+Tests topic
+/kafka/bin/kafka-console-consumer.sh \
+--bootstrap-server kafka-1:9092,kafka-2:9092,kafka-3:9092 \
+--topic Tests --from-beginning
+
+for i in {1..5}; do echo "This is message $i"; done | \
+/kafka/bin/kafka-console-producer.sh \
+--bootstrap-server kafka-1:9092,kafka-2:9092,kafka-3:9092 \
+--topic Tests > /dev/null
+
+```
+
+```
+docker-compose build
+docker-compose up
 ```
