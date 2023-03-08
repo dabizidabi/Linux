@@ -57,17 +57,5 @@ services:
     - "2213:22"
     networks:
     - ansible-network
-  dockerhost:
-    container_name: dockerhost
-    image: ubuntu
-#    entrypoint: /bin/sh
-    tty: true
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock #caution oops!
-    ports:
-    - "2214:22"
-    networks:
-    - ansible-network
-    
 networks:
   ansible-network:
