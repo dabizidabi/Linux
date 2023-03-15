@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 FROM ubuntu:22.04
 
 RUN set -eux; \
@@ -12,7 +13,7 @@ RUN set -eux; \
 
 RUN mkdir ~/.ssh
 
-COPY test-remote-key.pub /root/.ssh/authorized_keys
+COPY --link test-remote-key.pub /root/.ssh/authorized_keys
 RUN chmod 600 ~/.ssh/authorized_keys
 
 RUN service ssh start
