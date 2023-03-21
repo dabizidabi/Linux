@@ -9,6 +9,8 @@ on:
   pull_request:
     branches:
       - dev
+    paths: 
+      - 'management/**'
 
 jobs:
   ci:
@@ -29,7 +31,7 @@ jobs:
         env:
           APP: "mytoolbox"
           REGISTRY: ${{ secrets.DOCKERHUB_USERNAME }}
-        run: make build-image push
+        run: make -C /home/runner/work/Linux/Linux/management build-image push
 
   cd:
     name: CD
@@ -42,7 +44,6 @@ jobs:
         git config user.name github-actions
         git config user.email github-actions@github.com
         PREV_VERSION=$(git describe --tags |awk -F- '{ print $1 }')
-        PATCHLEVEL=$(echo $PREV_VERSION | awk -F. '{ print $2 }')
-        VERSION=$(echo $(echo -n $PREV_VERSION | awk -F. '{ print $1}').$((PATCHLEVEL+1)))
+        VERSION=$(echo -n $PREV_VERSION | awk -F. '{ print $1"."$2+1"."$3}')
         git tag -a $VERSION -m "Releasing version $VERSION"
         git push --tags
