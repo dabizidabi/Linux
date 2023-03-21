@@ -31,7 +31,7 @@ jobs:
         env:
           APP: "mytoolbox"
           REGISTRY: ${{ secrets.DOCKERHUB_USERNAME }}
-        run: make -C management/ build-image push
+        run: make -C /home/runner/work/Linux/Linux/management build-image push
 
   cd:
     name: CD
