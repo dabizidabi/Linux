@@ -1,0 +1,53 @@
+name: Build docker image
+
+on: 
+  push:
+    branches:
+      - main
+    paths: 
+      - 'management/Dockerfile'
+  pull_request:
+    branches:
+      - main
+    paths: 
+      - 'management/Dockerfile'
+
+jobs:
+  ci:
+    name: ci
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Docker Hub login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Build&Push
+        env:
+          APP: "mytoolbox"
+          REGISTRY: ${{ secrets.DOCKERHUB_USERNAME }}
+        run: make -C /home/runner/work/Linux/Linux/management build-image push
+
+  cd:
+    name: CD
+    needs: ci
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+          fetch-depth: 0
+    - run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        PREV_VERSION=$(git describe --tags |awk -F- '{ print $1 }')
+        VERSION=$(echo -n $PREV_VERSION | awk -F. '{ print $1"."$2+1"."$3}')
+        git tag -a $VERSION -m "Releasing version $VERSION"
+        git push --tags
