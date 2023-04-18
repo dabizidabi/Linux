@@ -5,6 +5,7 @@ LABEL description="This image provides commonly used tools"
 ARG TERRAFORM_VERSION=1.3.7
 ARG TERRAFORM_DOCS_VERSION=v0.16.0
 ARG HELM_VERSION=v3.11.0
+ARG HELMFILE_VERSION=0.152.0
 ARG KUBECTL_VERSION=v1.16.1
 ARG GCP_CLI_VERSION=417.0.1
 ARG ANSIBLE_VERSION=4.10.0
@@ -27,6 +28,14 @@ RUN curl -o /tmp/helm.tar.gz -LO https://get.helm.sh/helm-${HELM_VERSION}-linux-
     && mkdir /tmp/Helm && tar -zxf /tmp/helm.tar.gz -C /tmp/Helm --strip-components 1 \
     && mv /tmp/Helm/helm /usr/local/bin/ \
     && helm version
+
+#get helmfile
+RUN set -eux \
+    && curl -o /tmp/helmfile.tar.gz -L https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz \
+    && tar -zxf /tmp/helmfile.tar.gz -C /tmp \
+    && chmod +x /tmp/helmfile \
+    && mv /tmp/helmfile /usr/local/bin \
+    && helmfile --version
 
 #get kubectl
 RUN curl -o /tmp/kubectl -LO https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
