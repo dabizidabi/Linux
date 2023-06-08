@@ -4,11 +4,12 @@ LABEL description="This image provides commonly used tools"
 
 ARG TERRAFORM_VERSION=1.3.7
 ARG TERRAFORM_DOCS_VERSION=v0.16.0
-ARG HELM_VERSION=v3.11.0
-ARG HELMFILE_VERSION=0.152.0
+ARG HELM_VERSION=v3.12.0
+ARG HELMFILE_VERSION=0.154.0
 ARG KUBECTL_VERSION=v1.16.1
 ARG GCP_CLI_VERSION=417.0.1
 ARG ANSIBLE_VERSION=4.10.0
+ARG YQ_VERSION=v4.34.1
 
 RUN yum install -y jq gzip nano tar git unzip wget curl zsh python3 && yum -y clean all && rm -rf /var/cache
 
@@ -29,13 +30,14 @@ RUN curl -o /tmp/helm.tar.gz -LO https://get.helm.sh/helm-${HELM_VERSION}-linux-
     && mv /tmp/Helm/helm /usr/local/bin/ \
     && helm version
 
-#get helmfile
+#get helmfile & helm diff plugin
 RUN set -eux \
     && curl -o /tmp/helmfile.tar.gz -L https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz \
     && tar -zxf /tmp/helmfile.tar.gz -C /tmp \
     && chmod +x /tmp/helmfile \
     && mv /tmp/helmfile /usr/local/bin \
-    && helmfile --version
+    && helmfile --version \
+    && helm plugin install https://github.com/databus23/helm-diff
 
 #get kubectl
 RUN curl -o /tmp/kubectl -LO https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
@@ -57,6 +59,10 @@ RUN python3 -m pip install ansible==${ANSIBLE_VERSION}
 RUN git clone https://github.com/ahmetb/kubectx /tmp/kubectx \
     && chmod +x /tmp/kubectx/kube* \
     && mv /tmp/kubectx/kube* /usr/local/bin
+
+#get yq yaml processor
+RUN wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 -O /usr/bin/yq \
+    && chmod +x /usr/bin/yq
 
 #clear temp files
 RUN rm -rf /tmp/* 
