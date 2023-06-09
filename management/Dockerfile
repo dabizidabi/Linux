@@ -2,7 +2,7 @@ FROM amazon/aws-cli:2.9.16
 
 LABEL description="This image provides commonly used tools"
 
-ARG TERRAFORM_VERSION=1.3.7
+ARG TERRAFORM_VERSION=1.4.2
 ARG TERRAFORM_DOCS_VERSION=v0.16.0
 ARG HELM_VERSION=v3.12.0
 ARG HELMFILE_VERSION=0.154.0
@@ -15,11 +15,11 @@ RUN yum install -y jq gzip nano tar git unzip wget curl zsh python3 && yum -y cl
 
 #get terraform & terraform docs
 RUN set -eux \
-    && curl -o /tmp/terraform.zip -LO https://releases.hashicorp.com/terraform/1.3.7/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
+    && curl -o /tmp/terraform.zip -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
     && unzip /tmp/terraform.zip \
     && chmod +x terraform && mv terraform /usr/local/bin/ \
     && terraform -version \
-    && curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.16.0/terraform-docs-${TERRAFORM_DOCS_VERSION}-$(uname)-amd64.tar.gz \
+    && curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/${TERRAFORM_DOCS_VERSION}/terraform-docs-${TERRAFORM_DOCS_VERSION}-$(uname)-amd64.tar.gz \
     && tar -xzf terraform-docs.tar.gz \
     && mv terraform-docs /usr/local/bin \
     && terraform-docs --version
