@@ -16,5 +16,27 @@ nodes:
      hostPort: 443
      protocol: TCP
 - role: worker
+  kubeadmConfigPatches:
+  - |
+    kind: JoinConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "services=prometheus"
+        register-with-taints: "services=prometheus:NoSchedule"
+  labels:
+    services: prometheus
 - role: worker
+  kubeadmConfigPatches:
+  - |
+    kind: JoinConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "services=prometheus"
+        register-with-taints: "services=prometheus:NoSchedule"
 - role: worker
+  kubeadmConfigPatches:
+  - |
+    kind: JoinConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "services=prometheus"
